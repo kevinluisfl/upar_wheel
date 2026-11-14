@@ -22,17 +22,17 @@
     <!-- Barra Superior Estilo Studio -->
     <header class="app-header">
         <div class="header-container">
-            <!-- Logo y Título -->
+            <!-- Logo y Título con identidad UparWheel Studio -->
             <div class="brand-group">
                 <div class="brand-icon">
                     <i class="fa-solid fa-dharmachakra"></i>
                 </div>
                 <div>
                     <div class="brand-title-row">
-                        <h1><span id="uiMainTitle">Ruleta de Participación</span></h1>
+                        <h1>UparWheel <span class="text-indigo">Studio</span></h1>
                         <span id="uiBadgeInteractive" class="badge-pill">Interactivo</span>
                     </div>
-                    <p id="uiMainSubtitle">Organizador y selector interactivo para el aula de clase</p>
+                    <p id="uiMainSubtitle">Ruleta selectora interactiva para el aula</p>
                 </div>
             </div>
 
@@ -123,11 +123,16 @@
             <div class="config-item hidden" id="autoTimeWrapper">
                 <i class="fa-regular fa-clock text-indigo"></i>
                 <label for="autoTimeInput" id="uiLabelAutoWait">Espera:</label>
-                <input type="number" id="autoTimeInput" min="2" max="30" value="4">
+                <input type="number" id="autoTimeInput" min="2" max="60" value="4">
                 <span id="uiLabelSeconds">seg</span>
             </div>
 
             <div class="controls-actions">
+                <!-- Botón Modo Concentración / Pantalla Completa -->
+                <button id="focusModeBtn" class="btn-toggle" title="Modo Concentración / Pantalla Completa para proyectar">
+                    <i id="focusModeIcon" class="fa-solid fa-expand text-indigo"></i>
+                    <span id="uiBtnFocusMode">Concentración</span>
+                </button>
                 <!-- Botones de control global -->
                 <button id="toggleWheel2Btn" class="btn-toggle">+ Añadir Segunda Ruleta</button>
                 <button id="spinAllBtn" class="btn-spin-all hidden" disabled>
@@ -217,7 +222,10 @@
                 </button>
             </div>
         </section>
-
+        <!-- Pie de Página -->
+        <footer class="app-footer">
+            <p id="uiFooterLeft"><strong>UparWheel Studio</strong> — Creado por <a href="https://github.com/kevinluisfl" target="_blank">(klfl)</a> 💻</p>
+        </footer>
     </main>
 
     <!-- ==================== MODALES DEL SISTEMA ==================== -->

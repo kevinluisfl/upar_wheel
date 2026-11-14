@@ -893,3 +893,56 @@ canvas:hover {
         justify-content: center;
     }
 }
+
+/* ==========================================================================
+   8. MODO CONCENTRACIÓN / PANTALLA COMPLETA (PROYECCIÓN TV / VIDEO BEAM)
+   ========================================================================== */
+body.focus-mode .app-header,
+body.focus-mode .header-actions,
+body.focus-mode .voice-prefix-wrapper,
+body.focus-mode .textarea-wrapper,
+body.focus-mode .app-footer {
+    display: none !important;
+}
+
+body.focus-mode .wheels-grid {
+    max-width: 1400px;
+    align-items: center;
+    min-height: calc(100vh - 110px);
+}
+
+body.focus-mode .wheel-unit {
+    max-width: 580px;
+    padding: 2rem;
+}
+
+body.focus-mode .wheel-header {
+    justify-content: center;
+    margin-bottom: 1.25rem;
+}
+
+body.focus-mode .wheel-header h2 {
+    font-size: 1.4rem;
+}
+
+body.focus-mode canvas {
+    width: 450px;
+    height: 450px;
+}
+
+.app-footer {
+    margin-top: auto;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    background: var(--header-bg);
+}
+
+.app-footer a {
+    color: var(--accent-light);
+    text-decoration: none;
+    font-weight: 700;
+}

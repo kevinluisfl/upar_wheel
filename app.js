@@ -18,9 +18,12 @@ const SECTOR_COLORS = [
    -------------------------------------------------------------------------- */
 const I18N = {
     es: {
+        btnFocusMode: "Concentración",
+        btnExitFocusMode: "Salir de Concentración",
+        footerLeft: "<strong>UparWheel Studio</strong> — Creado por <a href=\"https://github.com/kevinluisfl\" target=\"_blank\">(klfl)</a> 💻",
         mainTitle: "Ruleta de Participación",
         badgeInteractive: "Interactivo",
-        mainSubtitle: "Organizador y selector interactivo para el aula de clase",
+        mainSubtitle: "Ruleta selectora interactiva para el aula",
         btnSettings: "Configuración",
         settingsTitle: "Ajustes de Voz y Sonido",
         btnTestVoice: "Probar",
@@ -81,9 +84,12 @@ const I18N = {
         cleanerErrorEmpty: "❌ No se detectaron nombres. Asegúrate de incluir comas (ej. APELLIDOS, NOMBRES)."
     },
     en: {
+        btnFocusMode: "Focus Mode",
+        btnExitFocusMode: "Exit Focus",
+        footerLeft: "<strong>UparWheel Studio</strong> — Created by <a href=\"https://github.com/kevinluisfl\" target=\"_blank\">(klfl)</a> 💻",
         mainTitle: "Participation Wheel",
         badgeInteractive: "Interactive",
-        mainSubtitle: "Interactive classroom selector and activity organizer",
+        mainSubtitle: "Interactive wheel for the classroom",
         btnSettings: "Settings",
         settingsTitle: "Voice & Sound Settings",
         btnTestVoice: "Test",
@@ -888,7 +894,11 @@ function applyTranslations() {
     langLabel.textContent = currentLang.toUpperCase();
     document.documentElement.lang = currentLang;
 
-    document.getElementById('uiMainTitle').textContent = t('mainTitle');
+    //document.getElementById('uiMainTitle').textContent = t('mainTitle');
+    document.getElementById('uiBtnFocusMode').textContent = isFocusMode ? t('btnExitFocusMode') : t('btnFocusMode');
+    if (document.getElementById('uiFooterLeft')) {
+        document.getElementById('uiFooterLeft').innerHTML = t('footerLeft');
+    }
     document.getElementById('uiBadgeInteractive').textContent = t('badgeInteractive');
     document.getElementById('uiMainSubtitle').textContent = t('mainSubtitle');
     document.getElementById('uiBtnSettings').textContent = t('btnSettings');
@@ -1059,6 +1069,49 @@ spinAllBtn.addEventListener('click', () => {
         pendingWinners = [];
         wheel1.spin();
         wheel2.spin();
+    }
+});
+
+/* --------------------------------------------------------------------------
+   MODO CONCENTRACIÓN / PANTALLA COMPLETA (TV / VIDEO BEAM)
+   -------------------------------------------------------------------------- */
+const focusModeBtn = document.getElementById('focusModeBtn');
+const focusModeIcon = document.getElementById('focusModeIcon');
+let isFocusMode = false;
+
+function updateFocusModeUI() {
+    document.body.classList.toggle('focus-mode', isFocusMode);
+    if (focusModeIcon) {
+        focusModeIcon.className = isFocusMode
+            ? 'fa-solid fa-compress text-indigo'
+            : 'fa-solid fa-expand text-indigo';
+    }
+    const btnText = document.getElementById('uiBtnFocusMode');
+    if (btnText) {
+        btnText.textContent = isFocusMode ? t('btnExitFocusMode') : t('btnFocusMode');
+    }
+}
+
+if (focusModeBtn) {
+    focusModeBtn.addEventListener('click', () => {
+        isFocusMode = !isFocusMode;
+        updateFocusModeUI();
+        if (isFocusMode) {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            }
+        } else {
+            if (document.fullscreenElement && document.exitFullscreen) {
+                document.exitFullscreen().catch(() => {});
+            }
+        }
+    });
+}
+
+document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement && isFocusMode) {
+        isFocusMode = false;
+        updateFocusModeUI();
     }
 });
 
